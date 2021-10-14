@@ -17,35 +17,52 @@ const languagesList = data.map((language) => {
 export const MobileMenu: FC = () => {
   console.log(languagesList);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLanguageSelectMenuOpen, setIsLanguageSelectMenuOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(
     languagesList.find((language) => language.shortName === 'Ru'),
   );
   console.log(selectedLanguage);
 
   const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
+  const handleLanguageSelectMenuToggle = () =>
+    setIsLanguageSelectMenuOpen(!isLanguageSelectMenuOpen);
+
   return (
     <div className={cx('container', isMenuOpen && 'mobileMenuOpen')}>
       <div className={cx('mobileMenuUpperLine')}>
-        <button className={cx('languageSelectButton')}>
+        <button
+          className={cx('languageSelectButton')}
+          onClick={handleLanguageSelectMenuToggle}
+        >
           <div className={cx('languageSelectIconContainer')}>
             <img
               className={cx('flagImage', 'languageSelectIcon')}
-              src={selectedLanguage?.imageLink || ''}
+              src={selectedLanguage?.imageLink}
             />
           </div>
-          <span>{selectedLanguage?.shortName || ''}</span>
+          <span className={cx('languageSelectButtonText')}>
+            {selectedLanguage?.shortName}
+          </span>
+          <div className={cx('languageSelectArrow')} />
         </button>
-        <ul className={cx('languageList')}>
-          {languagesList.map((language) => (
-            <li key={language.id}>
-              <img className={cx('flagImage')} src={language.imageLink} />
-              <span>{language.fullName}</span>
-              {language.shortName === selectedLanguage?.shortName && <span>✓</span>}
-            </li>
-          ))}
-        </ul>
+        <div className={cx('languageSelectMenu', !isLanguageSelectMenuOpen && 'hidden')}>
+          <h3 className={cx('languageSelectMenuTitle')}>Страна</h3>
+          <ul className={cx('languageList')}>
+            {languagesList.map((language) => (
+              <li className={cx('languageListElement')} key={language.id}>
+                <img
+                  className={cx('flagImage', 'languageListImage')}
+                  src={language.imageLink}
+                />
+                <span className={cx('languageListText')}>{language.fullName}</span>
+                {language.shortName === selectedLanguage?.shortName && <span>✓</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <button
-          className={cx(isMenuOpen ? 'close' : 'burger')}
+          className={cx('menuButton', isMenuOpen ? 'close' : 'burger')}
           onClick={handleMenuToggle}
         />
       </div>

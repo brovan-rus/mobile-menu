@@ -14,7 +14,7 @@
   max-height: 100%;
 }
 
-.languageList {
+.hidden {
   display: none;
 }
 
@@ -22,16 +22,21 @@
   display: flex;
   box-sizing: border-box;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   padding: 10px 15px 0 12px;
   background-color: yellow;
 }
 
 .languageSelectButton {
+  position: relative;
   display: flex;
+  box-sizing: border-box;
   flex-direction: row;
-  align-content: center;
-  padding: 7px 11px;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -48,6 +53,94 @@
   width: 24px;
   height: 24px;
   box-sizing: border-box;
-  margin-right: 11px;
   padding: 3px;
+  margin-right: 8px;
+}
+
+.languageSelectButtonText {
+  margin-right: 5px;
+  color: var(--black);
+  font-family: 'Golos Text', 'Arial', sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.languageSelectArrow {
+  width: 16px;
+  height: 16px;
+  background: url('../../images/arrow-down.svg') no-repeat center;
+  background-size: contain;
+}
+
+.menuButton {
+  width: 19px;
+  height: 19px;
+  border: 0;
+  background: center no-repeat;
+  background-size: cover;
+}
+
+.burger {
+  background-image: url('../../images/burger-button.svg');
+}
+
+.close {
+  background-image: url('../../images/close-button.svg');
+}
+
+.languageSelectMenu {
+  position: absolute;
+  top: 37px;
+  left: 0;
+  width: 180px;
+  box-sizing: border-box;
+  padding: 8px 17px;
+  border: 1px solid red;
+  list-style-type: none;
+}
+
+.languageSelectMenuTitle {
+  padding: 0;
+  margin: 0 0 8px 0;
+  color: var(--black);
+  font-family: 'Golos Text', 'Arial', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.languageList {
+  display: grid;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(6, 40px);
+  list-style-type: none;
+  row-gap: 8px;
+}
+
+.languageListElement {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.languageListImage {
+  width: 12px;
+  height: 14px;
+  margin-right: 12px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.languageListText {
+  font-family: 'Golos Text', 'Arial', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 24px;
 }
