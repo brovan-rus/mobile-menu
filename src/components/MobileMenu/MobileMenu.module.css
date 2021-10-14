@@ -14,18 +14,15 @@
   max-height: 100%;
 }
 
-.hidden {
-  display: none;
-}
-
 .mobileMenuUpperLine {
   display: flex;
+  height: 42px;
   box-sizing: border-box;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 10px 15px 0 12px;
-  background-color: yellow;
+  background-color: var(--white);
 }
 
 .languageSelectButton {
@@ -35,9 +32,21 @@
   flex-direction: row;
   align-items: center;
   padding: 0;
-  border: 0;
+  border: 2px solid transparent;
   background-color: transparent;
   cursor: pointer;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .25));
+  transition: opacity .4s linear, background-color .4s ease, border .4s ease;
+}
+
+.languageSelectButton:hover {
+  opacity: .8;
+}
+
+.languageSelectButton.visible {
+  border: 2px solid rgba(131, 188, 255, .5);
+  background: rgba(29, 125, 237, .1);
+  border-radius: 2px;
 }
 
 .flagImage {
@@ -80,6 +89,12 @@
   border: 0;
   background: center no-repeat;
   background-size: cover;
+  cursor: pointer;
+  transition: opacity .4s linear;
+}
+
+.menuButton:hover {
+  opacity: .8;
 }
 
 .burger {
@@ -97,8 +112,17 @@
   width: 180px;
   box-sizing: border-box;
   padding: 8px 17px;
-  border: 1px solid red;
+  border: 1px solid var(--black);
+  box-shadow: 0 6px 10px 0 #74899b0f, 0 3px 5px 0 #74899b14, 0 1px 18px 0 #74899b0a;
   list-style-type: none;
+  opacity: 0;
+  transition: opacity .4s ease, visibility .5s ease;
+  visibility: hidden;
+}
+
+.languageSelectMenu.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
 .languageSelectMenuTitle {
@@ -124,9 +148,11 @@
 }
 
 .languageListElement {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 }
 
 .languageListImage {
@@ -143,4 +169,12 @@
   font-style: normal;
   font-weight: normal;
   line-height: 24px;
+}
+
+.languageListTick {
+  position: absolute;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  background-image: url('../../images/tick.svg');
 }

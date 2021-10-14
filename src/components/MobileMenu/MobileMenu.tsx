@@ -26,12 +26,17 @@ export const MobileMenu: FC = () => {
   const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
   const handleLanguageSelectMenuToggle = () =>
     setIsLanguageSelectMenuOpen(!isLanguageSelectMenuOpen);
+  const handleLanguageChange = (shortName: string) => {
+    setSelectedLanguage(
+      languagesList.find((language) => language.shortName === shortName),
+    );
+  };
 
   return (
     <div className={cx('container', isMenuOpen && 'mobileMenuOpen')}>
       <div className={cx('mobileMenuUpperLine')}>
         <button
-          className={cx('languageSelectButton')}
+          className={cx('languageSelectButton', isLanguageSelectMenuOpen && 'visible')}
           onClick={handleLanguageSelectMenuToggle}
         >
           <div className={cx('languageSelectIconContainer')}>
@@ -45,17 +50,23 @@ export const MobileMenu: FC = () => {
           </span>
           <div className={cx('languageSelectArrow')} />
         </button>
-        <div className={cx('languageSelectMenu', !isLanguageSelectMenuOpen && 'hidden')}>
+        <div className={cx('languageSelectMenu', isLanguageSelectMenuOpen && 'visible')}>
           <h3 className={cx('languageSelectMenuTitle')}>Страна</h3>
           <ul className={cx('languageList')}>
             {languagesList.map((language) => (
-              <li className={cx('languageListElement')} key={language.id}>
+              <li
+                className={cx('languageListElement')}
+                key={language.shortName}
+                onClick={() => handleLanguageChange(language.shortName)}
+              >
                 <img
                   className={cx('flagImage', 'languageListImage')}
                   src={language.imageLink}
                 />
                 <span className={cx('languageListText')}>{language.fullName}</span>
-                {language.shortName === selectedLanguage?.shortName && <span>✓</span>}
+                {language.shortName === selectedLanguage?.shortName && (
+                  <div className={cx('languageListTick')} />
+                )}
               </li>
             ))}
           </ul>
