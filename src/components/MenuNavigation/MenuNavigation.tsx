@@ -22,20 +22,36 @@ interface ISecondLayerData {
   content: { id: string; title: string; text: string }[];
 }
 
+interface IThirdLayerData {
+  id: string;
+  title: string;
+  text: string;
+}
+
 const cx = cn.bind(styles);
 
 export const MenuNavigation: FC<IMenuNavigation> = ({ navigationData, isMenuOpen }) => {
   const [currentMenuLayer, setCurrentMenuLayer] = useState(1);
   const [secondLayerData, setSecondLayerData] = useState<ISecondLayerData[]>();
   const [secondLayerTitle, setSecondLayerTitle] = useState('');
+  const [thirdLayerTitle, setThirdLayerTitle] = useState('');
+  const [thirdLayerData, setThirdLayerData] = useState<IThirdLayerData[]>();
+  console.log(thirdLayerData);
+  console.log(thirdLayerTitle);
+  const handleOpenPreviousLayer = () => {
+    setCurrentMenuLayer(currentMenuLayer - 1);
+  };
   const handleOpenSecondLayer = (id: number, title: string) => {
     setSecondLayerData(navigationData?.filter((el) => el.id === id)[0].content);
     setCurrentMenuLayer(2);
     setSecondLayerTitle(title);
   };
-  const handleOpenFirstLayer = () => {
-    setCurrentMenuLayer(1);
+  const handleOpenThirdLayer = (id: number, title: string) => {
+    setThirdLayerData(secondLayerData?.filter((el) => el.id === id)[0]?.content);
+    setThirdLayerTitle(title);
+    setCurrentMenuLayer(3);
   };
+
   return (
     <div
       className={cx(
@@ -82,7 +98,7 @@ export const MenuNavigation: FC<IMenuNavigation> = ({ navigationData, isMenuOpen
       {/*Второй уровень меню*/}
       <button
         type="button"
-        onClick={handleOpenFirstLayer}
+        onClick={handleOpenPreviousLayer}
         className={cx(
           'text',
           'button',
@@ -97,9 +113,37 @@ export const MenuNavigation: FC<IMenuNavigation> = ({ navigationData, isMenuOpen
       <ul className={cx('list', 'secondLayer', currentMenuLayer !== 2 && 'hidden')}>
         {secondLayerData?.map((el) => (
           <li key={el.id}>
-            <button className={cx('button', 'text', 'titleMedium')} type="button">
+            <button
+              className={cx('button', 'text', 'titleMedium')}
+              type="button"
+              onClick={() => handleOpenThirdLayer(el.id, el.title)}
+            >
               {el.title}
             </button>
+          </li>
+        ))}
+      </ul>
+
+      {/*Третий уровень меню*/}
+      <button
+        type="button"
+        onClick={handleOpenPreviousLayer}
+        className={cx(
+          'text',
+          'button',
+          'titleLarge',
+          'titleSecondLayer',
+          'backButton',
+          currentMenuLayer !== 3 && 'hidden',
+        )}
+      >
+        {thirdLayerTitle}
+      </button>
+      <ul className={cx('list', 'thirdLayer', currentMenuLayer !== 3 && 'hidden')}>
+        {thirdLayerData?.map((el) => (
+          <li>
+            <h3 className={cx('text', 'titleSmall', 'thirdLayer')}>{el.title}</h3>
+            <p className={cx('text', 'mainText')}>{el.text}</p>
           </li>
         ))}
       </ul>
