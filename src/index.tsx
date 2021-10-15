@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './vendor/golostext/golostext.css';
+import '../src/constants/palette.css';
 import { App } from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 

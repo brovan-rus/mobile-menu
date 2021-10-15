@@ -30,6 +30,7 @@ export const MenuUpperLine: FC<IMenuUpperLine> = (props) => {
       <button
         className={cx('languageSelectButton', isLanguageSelectMenuOpen && 'visible')}
         onClick={handleLanguageSelectMenuToggle}
+        type="button"
       >
         <div className={cx('languageSelectIconContainer')}>
           <img
@@ -54,6 +55,7 @@ export const MenuUpperLine: FC<IMenuUpperLine> = (props) => {
               <img
                 className={cx('flagImage', 'languageListImage')}
                 src={language.imageLink}
+                alt={`${language.fullName} flag icon`}
               />
               <span className={cx('languageListText')}>{language.fullName}</span>
               {language.shortName === selectedLanguage?.shortName && (
@@ -63,8 +65,11 @@ export const MenuUpperLine: FC<IMenuUpperLine> = (props) => {
           ))}
         </ul>
       </div>
-
-      <button className={cx('menuButton', menuButton)} onClick={handleMenuToggle} />
+      <button
+        type="button"
+        className={cx('menuButton', menuButton)}
+        onClick={handleMenuToggle}
+      />
     </div>
   );
 };

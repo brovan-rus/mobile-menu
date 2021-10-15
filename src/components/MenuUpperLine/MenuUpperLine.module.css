@@ -5,7 +5,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 15px 0 12px;
+  padding: 10px 15px 0 20px;
   background-color: var(--white);
 }
 
@@ -91,12 +91,13 @@
 
 .languageSelectMenu {
   position: absolute;
+  z-index: 1;
   top: 37px;
-  left: 0;
+  left: 20px;
   width: 180px;
   box-sizing: border-box;
   padding: 8px 17px;
-  border: 1px solid var(--black);
+  background-color: var(--white);
   box-shadow: 0 6px 10px 0 #74899b0f, 0 3px 5px 0 #74899b14, 0 1px 18px 0 #74899b0a;
   list-style-type: none;
   opacity: 0;

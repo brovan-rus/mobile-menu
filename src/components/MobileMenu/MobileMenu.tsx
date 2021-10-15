@@ -4,6 +4,7 @@ import cn from 'classnames/bind';
 import styles from './MobileMenu.module.css';
 import data from './assets/mock-data.json';
 import { MenuUpperLine } from '../MenuUpperLine';
+import { MenuNavigation } from '../MenuNavigation';
 
 export interface ILang {
   imageLink?: string;
@@ -29,6 +30,11 @@ export const MobileMenu: FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(
     languagesList.find((language) => language.shortName === 'Ru'),
   );
+  const [currentLanguageNavigationData, setCurrentLanguageNavigationData] = useState(
+    data.find((language) => language.shortLang === selectedLanguage?.shortName)?.content,
+  );
+
+  console.log(currentLanguageNavigationData);
   console.log(selectedLanguage);
 
   const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
@@ -38,10 +44,11 @@ export const MobileMenu: FC = () => {
     setSelectedLanguage(
       languagesList.find((language) => language.shortName === shortName),
     );
+    setIsLanguageSelectMenuOpen(false);
   };
 
   return (
-    <div className={cx('container', isMenuOpen && 'mobileMenuOpen')}>
+    <div className={cx('container')}>
       <MenuUpperLine
         isLanguageSelectMenuOpen={isLanguageSelectMenuOpen}
         languagesList={languagesList}
@@ -51,7 +58,10 @@ export const MobileMenu: FC = () => {
         menuButton={isMenuOpen ? 'close' : 'burger'}
         selectedLanguage={selectedLanguage}
       />
-      <div className={cx('mobileMenu')}></div>
+      <MenuNavigation
+        navigationData={currentLanguageNavigationData}
+        isMenuOpen={isMenuOpen}
+      />
     </div>
   );
 };
