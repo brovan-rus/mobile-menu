@@ -24,7 +24,6 @@ const languagesList: ILang[] = data.map((language) => {
 });
 
 export const MobileMenu: FC = () => {
-  console.log(languagesList);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLanguageSelectMenuOpen, setIsLanguageSelectMenuOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(
@@ -35,7 +34,6 @@ export const MobileMenu: FC = () => {
   );
 
   console.log(currentLanguageNavigationData);
-  console.log(selectedLanguage);
 
   const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
   const handleLanguageSelectMenuToggle = () =>
@@ -44,8 +42,13 @@ export const MobileMenu: FC = () => {
     setSelectedLanguage(
       languagesList.find((language) => language.shortName === shortName),
     );
+    setCurrentLanguageNavigationData(
+      data.find((language) => language.shortLang === shortName)?.content,
+    );
     setIsLanguageSelectMenuOpen(false);
   };
+
+  console.log(currentLanguageNavigationData);
 
   return (
     <div className={cx('container')}>

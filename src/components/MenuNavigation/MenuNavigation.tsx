@@ -31,13 +31,12 @@ interface IThirdLayerData {
 const cx = cn.bind(styles);
 
 export const MenuNavigation: FC<IMenuNavigation> = ({ navigationData, isMenuOpen }) => {
+  console.log(navigationData);
   const [currentMenuLayer, setCurrentMenuLayer] = useState(1);
   const [secondLayerData, setSecondLayerData] = useState<ISecondLayerData[]>();
   const [secondLayerTitle, setSecondLayerTitle] = useState('');
   const [thirdLayerTitle, setThirdLayerTitle] = useState('');
   const [thirdLayerData, setThirdLayerData] = useState<IThirdLayerData[]>();
-  console.log(thirdLayerData);
-  console.log(thirdLayerTitle);
   const handleOpenPreviousLayer = () => {
     setCurrentMenuLayer(currentMenuLayer - 1);
   };
@@ -132,7 +131,7 @@ export const MenuNavigation: FC<IMenuNavigation> = ({ navigationData, isMenuOpen
           'text',
           'button',
           'titleLarge',
-          'titleSecondLayer',
+          'thirdLayer',
           'backButton',
           currentMenuLayer !== 3 && 'hidden',
         )}
