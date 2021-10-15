@@ -5,12 +5,16 @@
   max-height: 0;
   box-sizing: border-box;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0 30px;
   margin: 0;
   background-color: var(--white);
   list-style-type: none;
   transition: all .4s ease-in-out;
+}
+
+.container.firstLayer {
+  justify-content: space-between;
 }
 
 .container.mobileMenuOpen {
@@ -27,6 +31,10 @@
   grid-template-rows: repeat(4, 32px);
   list-style-type: none;
   row-gap: 20px;
+}
+
+.list.secondLayer {
+  row-gap: 22px;
 }
 
 .link {
@@ -47,6 +55,16 @@
   cursor: pointer;
   outline: 0;
   transition: opacity .5s linear;
+}
+
+.button.backButton {
+  height: auto;
+}
+
+.button.backButton::after {
+  top: 9px;
+  left: -10px;
+  background-image: url('../../images/arrow-left.svg');
 }
 
 .button:hover {
